@@ -9,8 +9,8 @@ Template.registerHelper("displayName", function displayName(user) {
     return user.username;
 });
 
-Template.registerHelper("saveText", function saveText(item) {
-   return (item && item._id) ? "Save" : "Create";
+Template.registerHelper("saveText", function saveText() {
+   return (this && this._id) ? "Save" : "Create";
 });
 
 Template.registerHelper("currentRoute", function currentRoute() {

@@ -2,6 +2,7 @@
   <h1>{{title}}</h1>
 
   <form>
+    <!--name-->
     <div class="row">
       <div class="large-12 columns">
         <label>Project name
@@ -12,16 +13,28 @@
 
     <!--activities-->
     <div class="row">
-      <div class="large-12 columns">
+      <div class="large-6 columns">
         <label>Activities</label>
-        <button type="button" class="button tiny secondary">Check all</button>
-        <button type="button" class="button tiny secondary">Check none</button>
+        <button type="button" class="button tiny secondary" rel="checkActivities">Check all</button>
+        <button type="button" class="button tiny secondary" rel="uncheckActivities">Check none</button>
+      </div>
+
+      <div class="large-6 columns">
+        <label>Client
+          <select name="client">
+            <option>-</option>
+            {{#each clients}}
+              <option value="{{_id}}" {{selectedClient}}>{{name}}</option>
+            {{/each}}
+          </select>
+        </label>
       </div>
     </div>
     <div class="row">
       <div class="large-12 columns">
         {{#each activities}}
-          <input type="checkbox" name="activity" id="{{_id}}"/><label for="{{_id}}">{{name}}</label>
+          <input type="checkbox" name="activity" id="{{_id}}" {{isChecked}} />
+          <label for="{{_id}}">{{name}}</label>
         {{/each}}
       </div>
     </div>
@@ -29,43 +42,15 @@
     <!--status-->
     <div class="row">
       <div class="large-6 columns">
-        <label>Status
-          <select name="status">
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-          </select>
-        </label>
-      </div>
-      <div class="large-6 columns">
-        <label>Client
-          <select name="status">
-            <option value="client1">Client 1</option>
-            <option value="client2">Client 2</option>
-          </select>
-        </label>
+        <label>Status</label>
+        <input type="checkbox" name="status" id="status" {{isActive}} /><label for="status">Active</label>
       </div>
     </div>
-    <div class="row">
-      <div class="large-6 columns">
-        <label>Budget
-          <input type="number" name="budget" />
-        </label>
-      </div>
-      <div class="large-6 columns">
-        <label>Budget unit
-          <select name="budgetUnit">
-            <option value="hours">Hours</option>
-            <option value="days">Days</option>
-            <option value="weeks">Weeks</option>
-            <option value="months">Months</option>
-            <option value="sek">SEK</option>
-          </select>
-        </label>
-      </div>
-    </div>
+
+    <!--save/delete-->
     <div class="row">
       <div class="large-12 columns">
-        <button class="button" type="submit">{{saveText this}}</button>
+        <button class="button" type="submit">{{saveText}}</button>
       </div>
     </div>
   </form>

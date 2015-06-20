@@ -1,0 +1,23 @@
+<template name="client">
+  <h1>{{title}}</h1>
+
+  <form>
+    <div class="row">
+      <div class="large-12 columns">
+        <label class="{{error}}">Activity name
+          <input type="text" name="name" class="{{error}}" value="{{name}}" required/>
+          <small class="{{error}}">{{errorText}}</small>
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <button class="button" type="submit">{{saveText}}</button>
+        {{#if this._id }}
+          <button type="button" class="button alert right" rel="delete">Delete</button>
+        {{/if}}
+      </div>
+    </div>
+  </form>
+</template>

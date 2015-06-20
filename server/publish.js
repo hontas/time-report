@@ -19,6 +19,14 @@ Meteor.publish("roles", function () {
     }
 });
 
+Meteor.publish("clients", function () {
+    if (this.userId) {
+        return Clients.find();
+    } else {
+        this.stop();
+    }
+});
+
 Meteor.publish("projects", function () {
     if (this.userId) {
         return Projects.find();

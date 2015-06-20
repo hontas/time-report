@@ -1,0 +1,14 @@
+<template name="clientsList">
+  <h1>Clients</h1>
+  <ul class="side-nav">
+    {{#each items}}
+      <li>
+        {{#linkTo route="client"}}{{name}}{{/linkTo}}
+      </li>
+    {{/each}}
+    <li class="divider"></li>
+    <li>
+      {{#linkTo route="client.new"}}+ new client{{/linkTo}}
+    </li>
+  </ul>
+</template>
