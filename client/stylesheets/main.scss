@@ -1,0 +1,12 @@
+@import '../lib/foundation/scss/foundation';
+
+.main-content {
+  padding-top: $panel-padding;
+}
+
+.not-found {
+  .not-found__title,
+  .not-found__description {
+    color: #6f6f6f;
+  }
+}

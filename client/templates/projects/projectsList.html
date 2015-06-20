@@ -1,0 +1,14 @@
+<template name="projectsList">
+  <h1>Projects</h1>
+  <ul class="side-nav" role="navigation">
+    {{#each items}}
+      <li>
+        {{#linkTo route="project"}}{{name}}{{/linkTo}}
+      </li>
+    {{/each}}
+    <li class="divider"></li>
+    <li>
+      {{#linkTo route="project.new"}}+ new project{{/linkTo}}
+    </li>
+  </ul>
+</template>

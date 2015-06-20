@@ -1,0 +1,47 @@
+<template name="role">
+  <h1>{{roleName}}</h1>
+
+  <form>
+    {{#if newRole}}
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Username
+            <input type="text" name="username" required />
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-21 columns">
+          <label>Password
+            <input type="password" name="password" required />
+          </label>
+        </div>
+      </div>
+    {{else}}
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Username
+            <input type="text" name="username" value="{{username}}" disabled/>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-6 columns">
+          <label>First name
+            <input type="text" name="firstName" value="{{profile.firstName}}" />
+          </label>
+        </div>
+        <div class="large-6 columns">
+          <label>Last name
+            <input type="text" name="lastName" value="{{profile.lastName}}" />
+          </label>
+        </div>
+      </div>
+    {{/if}}
+    <div class="row">
+      <div class="large-12 columns">
+        <button class="button" type="submit">{{saveText this}}</button>
+      </div>
+    </div>
+  </form>
+</template>

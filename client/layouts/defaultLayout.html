@@ -1,0 +1,17 @@
+<template name="defaultLayout">
+  {{> header}}
+
+  {{> yield "subHeader"}}
+
+  <div class="row main-content">
+    <aside class="aside medium-3 columns">
+      {{> yield "aside"}}
+    </aside>
+
+    <main class="medium-9 columns">
+      {{> yield}}
+    </main>
+  </div>
+
+  {{> yield "footer"}}
+</template>

@@ -1,0 +1,28 @@
+<template name="login">
+  <h1>Login</h1>
+
+  <form class="login">
+    <div class="row">
+      <div class="large-8 columns">
+        <label>Username
+          <div class="row collapse">
+            <div class="large-9 columns">
+              <input type="text" name="username" required/>
+            </div>
+            <div class="large-3 columns">
+              <span class="postfix">@weahead.se</span>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-8 columns">
+        <label>Password
+          <input type="password" name="password" required/>
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="button">Login</button>
+  </form>
+</template>

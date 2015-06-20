@@ -1,0 +1,14 @@
+<template name="activitiesList">
+  <h1>Activities</h1>
+  <ul class="side-nav" role="navigation">
+    {{#each items}}
+      <li>
+        {{#linkTo route="activity"}}{{name}}{{/linkTo}}
+      </li>
+    {{/each}}
+    <li class="divider"></li>
+    <li>
+      {{#linkTo route="activity.new"}}+ new activity{{/linkTo}}
+    </li>
+  </ul>
+</template>

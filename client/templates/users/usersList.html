@@ -1,0 +1,14 @@
+<template name="usersList">
+  <h1>Users</h1>
+  <ul class="side-nav" role="navigation">
+    {{#each items}}
+      <li>
+        {{#linkTo route="user"}}{{username}}{{/linkTo}}
+      </li>
+    {{/each}}
+    <li class="divider"></li>
+    <li>
+      {{#linkTo route="user.new"}}+ new user{{/linkTo}}
+    </li>
+  </ul>
+</template>

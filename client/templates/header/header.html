@@ -1,0 +1,27 @@
+<template name="header">
+  <header class="header">
+    <nav class="top-bar" data-topbar data-options="is_hover: false" role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#">TimR</a></h1>
+        </li>
+      </ul>
+
+      <section class="top-bar-section">
+        {{> adminNav}}
+
+        <ul class="right">
+          {{#if currentUser}}
+            <li class="has-dropdown not-click">
+              <a href="#">{{displayName currentUser}}</a>
+              <ul class="dropdown">
+                <li>{{#linkTo route="user.profile"}}My profile{{/linkTo}}</li>
+                <li><a href="#" rel="logout">Logout</a></li>
+              </ul>
+            </li>
+          {{/if}}
+        </ul>
+      </section>
+    </nav>
+  </header>
+</template>

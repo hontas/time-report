@@ -1,0 +1,67 @@
+<template name="user">
+  <h1>
+    {{#if newUser}}
+      new user
+    {{else}}
+      {{displayName this}}
+    {{/if}}
+  </h1>
+
+  <form>
+    {{#if newUser}}
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Username
+            <div class="row collapse">
+              <div class="large-9 columns">
+                <input type="text" name="username" required />
+              </div>
+              <div class="large-3 columns">
+                <span class="postfix">{{domain}}</span>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-21 columns">
+          <label>Password
+            <input type="password" name="password" required />
+          </label>
+        </div>
+      </div>
+    {{else}}
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Username
+            <input type="text" name="username" value="{{username}}" disabled/>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-6 columns">
+          <label>First name
+            <input type="text" name="firstName" value="{{profile.firstName}}" />
+          </label>
+        </div>
+        <div class="large-6 columns">
+          <label>Last name
+            <input type="text" name="lastName" value="{{profile.lastName}}" />
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-6 columns">
+          <label>User roles</label>
+          <input id="isAdmin" name="isAdmin" type="checkbox" checked={{isAdmin}} />
+          <label for="isAdmin">Admin</label>
+        </div>
+      </div>
+    {{/if}}
+    <div class="row">
+      <div class="large-12 columns">
+        <button class="button" type="submit">{{saveText this}}</button>
+      </div>
+    </div>
+  </form>
+</template>

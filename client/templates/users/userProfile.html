@@ -1,0 +1,44 @@
+<template name="userProfile">
+  <h1>
+    {{displayName this}}
+  </h1>
+
+  <form>
+    <div class="row">
+      <div class="large-12 columns">
+        <label>Username
+          <input type="text" name="username" value="{{username}}" disabled/>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns">
+        <label>First name
+          <input type="text" name="firstName" value="{{profile.firstName}}"/>
+        </label>
+      </div>
+      <div class="large-6 columns">
+        <label>Last name
+          <input type="text" name="lastName" value="{{profile.lastName}}"/>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns">
+        <label>Default activity
+          <select name="defaultActivity">
+            {{#each activities}}
+              <option value="{{_id}}">{{name}}</option>
+            {{/each}}
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <button class="button" type="submit">{{saveText}}</button>
+      </div>
+    </div>
+  </form>
+</template>

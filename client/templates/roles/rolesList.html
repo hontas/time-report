@@ -1,0 +1,14 @@
+<template name="rolesList">
+  <h1>Roles</h1>
+  <ul class="side-nav" role="navigation">
+    {{#each items}}
+      <li>
+        {{#linkTo route="role"}}{{name}}{{/linkTo}}
+      </li>
+    {{/each}}
+    <li class="divider"></li>
+    <li>
+      {{#linkTo route="role.new"}}+ new role{{/linkTo}}
+    </li>
+  </ul>
+</template>
