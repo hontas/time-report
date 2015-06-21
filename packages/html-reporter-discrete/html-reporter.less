@@ -1,0 +1,120 @@
+#velocityOverlay {
+  @icon-width: 50px;
+  @padding: 20px;
+  @font-size-base: 14px;
+  @font-size-small: @font-size-base * 0.857142857; /* 12/14 */
+  @font-size-large: @font-size-base * 1.714285714; /* 24/14 */
+  @background-color: #fafafa;
+
+  padding: @padding;
+  font-size: @font-size-small;
+  background-color: fadeout(@background-color, 10%);
+
+  &.visible {
+    min-width: 400px;
+    & + .display-toggle .velocity-icon-status {
+      display: none;
+    }
+  }
+
+  .velocity-btn-close {
+
+  }
+
+  .velocity-logo {
+    display: none;
+  }
+
+  .velocity-options-toggle {
+    float: left;
+    position: relative;
+    top: -36px;
+  }
+
+  .velocity-summary {
+    display: none;
+
+    .velocity-icon-status {
+      border-width: @font-size-small;
+      font-size: @font-size-large;
+      width: @icon-width;
+      height: @icon-width;
+      vertical-align: -17px;
+    }
+
+    .velocity-icon-total {
+      border-width: 4px;
+      font-size: @font-size-large;
+      min-width: 70px;
+    }
+
+    .velocity-icon-total small {
+      font-size: @font-size-base;
+    }
+
+    .velocity-icon-time {
+      font-size: @font-size-base;
+      line-height: @icon-width;
+      width: @icon-width;
+      height: @icon-width;
+      vertical-align: @font-size-small;
+    }
+  }
+
+  .velocity-summary-text {
+    font-size: @font-size-large;
+    line-height: 1em;
+    margin-bottom: 10px;
+  }
+
+  .velocity-report {
+    .velocity-section-header {
+      background-color: @background-color;
+      margin: 0;
+      min-height: 0;
+    }
+
+    .velocity-section-name {
+      font-size: @font-size-base;
+      letter-spacing: 4px;
+      top: @font-size-small;
+    }
+
+    &.empty {
+      display: none;
+    }
+
+    &.passed {
+      .velocity-icon-status {
+        display: none;
+      }
+
+      .velocity-icon-status + .velocity-suite:before {
+        display: none;
+      }
+
+      .velocity-result-table {
+        .velocity-test-name,
+        .velocity-test-time {
+          padding: 2px 0;
+        }
+      }
+    }
+  }
+
+  .velocity-test {
+    &.failed + tr + tr .velocity-stack-trace {
+      cursor: pointer;
+      max-height: 0;
+      padding: 10px 15px;
+      &.open {
+        max-height: 1000em;
+      }
+    }
+  }
+
+  .velocity-fail-msg {
+    font-size: @font-size-small;
+    text-indent: 2.6em;
+  }
+}
