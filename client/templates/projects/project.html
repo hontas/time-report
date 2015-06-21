@@ -22,7 +22,7 @@
       <div class="large-6 columns">
         <label>Client
           <select name="client">
-            <option>-</option>
+            <option value="">-</option>
             {{#each clients}}
               <option value="{{_id}}" {{selectedClient}}>{{name}}</option>
             {{/each}}

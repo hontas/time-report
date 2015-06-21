@@ -25,10 +25,21 @@
     </div>
     <div class="row">
       <div class="large-6 columns">
+        <label>Default project
+          <select name="defaultProject">
+            <option value="">-</option>
+            {{#each projects}}
+              <option value="{{_id}}" {{selectedProject}}>{{name}}</option>
+            {{/each}}
+          </select>
+        </label>
+      </div>
+      <div class="large-6 columns">
         <label>Default activity
           <select name="defaultActivity">
+            <option value="">-</option>
             {{#each activities}}
-              <option value="{{_id}}">{{name}}</option>
+              <option value="{{_id}}" {{selectedActivity}}>{{name}}</option>
             {{/each}}
           </select>
         </label>

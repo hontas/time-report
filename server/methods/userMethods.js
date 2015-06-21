@@ -1,32 +1,6 @@
-function verifyLoggedIn(userId) {
-    if (!userId) {
-        console.log("Not logged in");
-        throw new Meteor.Error(403, "Access denied");
-    }
-}
-
-function verifyUserRights(userId, id) {
-    if (id) {
-        if (userId !== id && !Roles.userIsInRole(userId, ["admin"])) {
-            console.log("Don't have access");
-            throw new Meteor.Error(403, "Access denied");
-        }
-    } else {
-        if (!Roles.userIsInRole(userId, ["admin"])) {
-            console.log("Don't have access");
-            throw new Meteor.Error(403, "Access denied");
-        }
-    }
-}
-
-function verifyUserAccess(userId, id) {
-    verifyLoggedIn(userId);
-    verifyUserRights(userId, id);
-}
-
 Meteor.methods({
     createNewUser: function () {
-        verifyUserAccess(this.userId);
+        verifyUserAccess(this.userId, undefined, ["admin"]);
 
         return Accounts.createUser({
             username: username,
@@ -41,21 +15,38 @@ Meteor.methods({
     },
 
     updateUserProfile: function (id, profile) {
-        verifyUserAccess(this.userId, id);
+        verifyUserAccess(this.userId, id, ["admin"]);
+
+        var user = Meteor.users.findOne(id);
 
         check(profile, {
             firstName: String,
-            lastName: String
+            lastName: String,
+            defaultActivityId: Match.Optional(String),
+            defaultProjectId: Match.Optional(String)
         });
+
+        if (_.isUndefined(profile.defaultActivityId)) {
+            profile.defaultActivityId = user.profile.defaultActivityId;
+        }
+        if (_.isUndefined(profile.defaultProjectId)) {
+            profile.defaultProjectId = user.profile.defaultProjectId;
+        }
+
+        profile.updatedAt = new Date();
 
         Meteor.users.update(id, {
             $set: { profile: profile }
         });
     },
 
-    updateUserRoles: function (id, roles) {
-        verifyUserAccess(this.userId, id);
+    updateUserRoles: function (id, rolesObject) {
+        verifyUserAccess(this.userId, id, ["admin"]);
 
-        Roles.setUserRoles(id, roles.admin ? ["admin"] : []);
+        var roles = Object.keys(rolesObject).filter(function (key) {
+            return rolesObject[key];
+        });
+
+        Roles.setUserRoles(id, roles);
     }
 });

@@ -1,7 +1,7 @@
 <template name="user">
   <h1>
     {{#if newUser}}
-      new user
+      New user
     {{else}}
       {{displayName this}}
     {{/if}}
@@ -53,8 +53,10 @@
       <div class="row">
         <div class="large-6 columns">
           <label>User roles</label>
-          <input id="isAdmin" name="isAdmin" type="checkbox" checked={{isAdmin}} />
-          <label for="isAdmin">Admin</label>
+          {{#each userRoles}}
+            <input id="{{name}}" name="userRole" type="checkbox" checked={{hasRole}} />
+            <label for="{{name}}">{{capitalize name}}</label>
+          {{/each}}
         </div>
       </div>
     {{/if}}

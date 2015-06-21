@@ -5,6 +5,7 @@ Template.header.helpers({
 Template.header.events({
     "click [rel=logout]": function () {
         Meteor.logout();
+        Router.go("login");
     }
 });
 

@@ -29,7 +29,6 @@ Template.project.helpers({
 
     selectedClient: function () {
         var data = Template.instance().data;
-
         return (data && data.clientId === this._id) ? "selected" : null;
     }
 });
@@ -47,13 +46,9 @@ Template.project.events({
             clientId: form.client.selectedOptions[0].value
         };
 
-        Meteor.call("createUpdateProject", id, project, function (err, newId) {
-            if (err) {
-                console.error(err);
-            }
-
-            Router.go("project", { _id: newId || id });
-        });
+        promisedCall("createUpdateProject", id, project)
+            .then(routeTo("project"))
+            .catch(logError);
 
         return false;
     },

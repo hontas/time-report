@@ -1,0 +1,18 @@
+.notifications {
+    line-height: 1em;
+    left: calc(50% - 150px);
+    position: absolute;
+    max-width: 50%;
+    top: 0;
+    z-index: 10000;
+}
+
+.notifications .alert-box {
+    margin-bottom: 1rem;
+    padding-right: 2rem;
+    transition: all 300ms ease-out;
+}
+
+.notifications .alert-box.alert-open {
+    margin-top: calc(-46px - 1rem);
+}

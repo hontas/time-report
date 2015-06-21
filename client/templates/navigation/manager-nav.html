@@ -1,0 +1,9 @@
+<template name="managerNav">
+  {{#if isInRole "admin,manager"}}
+    <ul class="left">
+      <li>{{#linkTo route="clients"}}Clients{{/linkTo}}</li>
+      <li>{{#linkTo route="projects"}}Projects{{/linkTo}}</li>
+      <li>{{#linkTo route="activities"}}Activities{{/linkTo}}</li>
+    </ul>
+  {{/if}}
+</template>

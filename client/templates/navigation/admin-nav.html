@@ -1,5 +1,5 @@
 <template name="adminNav">
-  {{#if isInRole 'admin'}}
+  {{#if isInRole "admin"}}
     <ul class="left">
       <li class="has-dropdown not-click">
         <a href="#">Admin</a>
@@ -8,9 +8,6 @@
           <li>{{#linkTo route="roles"}}Roles{{/linkTo}}</li>
         </ul>
       </li>
-      <li>{{#linkTo route="clients"}}Clients{{/linkTo}}</li>
-      <li>{{#linkTo route="projects"}}Projects{{/linkTo}}</li>
-      <li>{{#linkTo route="activities"}}Activities{{/linkTo}}</li>
     </ul>
   {{/if}}
 </template>

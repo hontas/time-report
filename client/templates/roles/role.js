@@ -1,8 +1,4 @@
 Template.role.helpers({
-    newRole: function () {
-        return !this._id;
-    },
-
     roleName: function () {
         return this._id ? this.name : "New role";
     }
@@ -11,37 +7,18 @@ Template.role.helpers({
 Template.role.events({
     submit: function (event) {
         var form = event.target;
-        var username = form.username.value + "@weahead.se";
-        var profile = {};
-        var password, roles, id;
 
-
-        if (this._id) {
-            profile = {
-                firstName: form.firstName.value,
-                lastName: form.lastName.value
-            };
-            roles = {
-                admin: form.isAdmin.checked
-            };
-
-            Meteor.call("updateUserProfile", this._id, profile);
-            Meteor.call("updateUserRoles", this._id, roles);
-        } else {
-            password = form.password.value;
-            id = Meteor.call("createNewUser", {
-                username: username,
-                email: username,
-                password: password,
-                profile: profile
-            });
-
-            if (id) {
-                Router.go("user", { _id: id });
-            }
-        }
+        promisedCall("role.create", { name: form.role.value })
+            .then(routeTo("roles"))
+            .catch(logError);
 
         return false;
+    },
+
+    "click [rel=delete]": function () {
+        promisedCall("role.delete", this._id)
+            .then(routeTo("roles"))
+            .catch(logError);
     }
 });
 

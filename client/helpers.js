@@ -16,3 +16,11 @@ Template.registerHelper("saveText", function saveText() {
 Template.registerHelper("currentRoute", function currentRoute() {
     return Router.current().route.getName();
 });
+
+Template.registerHelper("capitalize", function capitalize(string) {
+    if (_.isString(string)) {
+        return string.charAt(0).toUpperCase() + string.substr(1);
+    } else {
+        return string;
+    }
+});

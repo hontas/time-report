@@ -1,6 +1,11 @@
 Template.user.helpers({
-    isAdmin: function () {
-        return Roles.userIsInRole(this._id, ["admin"]);
+    userRoles: function () {
+        return Meteor.roles.find({}, { name: 1 });
+    },
+
+    hasRole: function () {
+        var id = Template.instance().data._id;
+        return Roles.userIsInRole(id, [this.name]);
     },
 
     newUser: function () {
@@ -16,33 +21,46 @@ Template.user.events({
     submit: function (event) {
         var form = event.target;
         var username = form.username.value + "@weahead.se";
+        var roleInputs = _.toArray(form.userRole);
         var profile = {};
-        var password, roles, id;
+        var id = this._id;
+        var password, roles, user;
 
+        function getUserRoles(res, role) {
+            res[role.id] = role.checked;
+            return res;
+        }
 
-        if (this._id) {
+        function updateRoles() {
+            return promisedCall("updateUserRoles", id, roles);
+        }
+
+        if (id) {
             profile = {
                 firstName: form.firstName.value,
                 lastName: form.lastName.value
             };
-            roles = {
-                admin: form.isAdmin.checked
-            };
+            roles = roleInputs.reduce(getUserRoles, {});
 
-            Meteor.call("updateUserProfile", this._id, profile);
-            Meteor.call("updateUserRoles", this._id, roles);
+            promisedCall("updateUserProfile", id, profile)
+                .then(updateRoles)
+                .then(function () {
+                    Notify("Saved", { type: "success", closeAfter: 1500 });
+                })
+                .catch(logError);
+
         } else {
             password = form.password.value;
-            id = Meteor.call("createNewUser", {
+            user = {
                 username: username,
                 email: username,
                 password: password,
                 profile: profile
-            });
+            };
 
-            if (id) {
-                Router.go("user", { _id: id });
-            }
+            promisedCall("createNewUser", user)
+                .then(routeTo("user"))
+                .catch(logError);
         }
 
         return false;

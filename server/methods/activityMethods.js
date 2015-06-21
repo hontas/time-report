@@ -1,13 +1,6 @@
-function verifyLoggedIn(userId) {
-    if (!userId) {
-        console.log("Not logged in");
-        throw new Meteor.Error(403, "Access denied");
-    }
-}
-
 Meteor.methods({
     "activity.createUpdate": function (id, activity) {
-        verifyLoggedIn(this.userId);
+        verifyUserAccess(this.userId, undefined, ["admin", "manager"]);
 
         var now = new Date();
         activity.updatedAt = now;
@@ -25,7 +18,7 @@ Meteor.methods({
     },
 
     "activity.delete": function (id) {
-        verifyLoggedIn(this.userId);
+        verifyUserAccess(this.userId, undefined, ["admin", "manager"]);
 
         if (Activities.findOne(id)) {
             // TODO remove all references from projects

@@ -1,0 +1,10 @@
+<template name="notifications">
+  <div class="notifications">
+    {{#each notifications}}
+      <div data-alert id="{{_id}}" class="alert-box alert-open {{type}} {{style}}">
+        {{message}}
+        <a href="#" class="close">&times;</a>
+      </div>
+    {{/each}}
+  </div>
+</template>

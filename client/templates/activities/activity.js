@@ -17,28 +17,21 @@ Template.activity.events({
     submit: function (event) {
         var form = event.target;
         var nameInput = form.name;
-        var name = nameInput.value;
 
-        Meteor.call("activity.createUpdate", this._id, { name: name }, function (err) {
-            if (err) {
-                Session.set("error", err);
-            } else {
+        promisedCall("activity.createUpdate", this._id, { name: nameInput.value })
+            .then(function () {
                 Session.set("error", undefined);
                 nameInput.value = "";
-            }
-        });
+            })
+            .catch(Session.set.bind(Session, "error"));
 
         return false;
     },
 
     "click [rel=delete]": function () {
-        Meteor.call("activity.delete", this._id, function (err) {
-            if (err) {
-                console.error(err);
-            } else {
-                Router.go("activity.new");
-            }
-        })
+        promisedCall("activity.delete", this._id)
+            .then(routeTo("activity.new"))
+            .catch(logError);
     }
 });
 

@@ -8,13 +8,10 @@ Template.login.events({
         var username = form.username.value + "@weahead.se";
         var password = form.password.value;
 
-        Meteor.loginWithPassword(username, password, function (err) {
-            if (err) {
-                console.error(err);
-            } else {
-                Router.go("user", { _id: Meteor.userId() });
-            }
-        });
+        promisedLogin(username, password)
+            .then(routeTo("home"))
+            .catch(logError);
+
         return false;
     }
 });
