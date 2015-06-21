@@ -4,8 +4,9 @@ Template.header.helpers({
 
 Template.header.events({
     "click [rel=logout]": function () {
-        Meteor.logout();
-        Router.go("login");
+        Meteor.logout(function () {
+            Router.go("login");
+        });
     }
 });
 

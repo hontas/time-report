@@ -1,14 +1,20 @@
 Meteor.publish("userList", function () {
+    var fields = {
+        roles: 1,
+        emails: 1,
+        profile: 1,
+        username: 1
+    };
+
     if (this.userId && Roles.userIsInRole(this.userId, ['admin'])) {
-        return Meteor.users.find({}, {
-            roles: 1,
-            emails: 1,
-            profile: 1,
-            username: 1
-        });
-    } else {
-        this.stop();
+        return Meteor.users.find({}, fields);
     }
+
+    if (this.userId) {
+        return Meteor.users.find({ _id: this.userId }, fields);
+    }
+
+    this.stop();
 });
 
 Meteor.publish("roles", function () {
