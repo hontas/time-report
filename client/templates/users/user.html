@@ -9,6 +9,7 @@
 
   <form>
     {{#if newUser}}
+
       <div class="row">
         <div class="large-12 columns">
           <label>Username
@@ -30,7 +31,9 @@
           </label>
         </div>
       </div>
+
     {{else}}
+
       <div class="row">
         <div class="large-12 columns">
           <label>Username
@@ -41,24 +44,38 @@
       <div class="row">
         <div class="large-6 columns">
           <label>First name
-            <input type="text" name="firstName" value="{{profile.firstName}}" />
+            <input type="text" name="firstName" value="{{profile.firstName}}"/>
           </label>
         </div>
         <div class="large-6 columns">
           <label>Last name
-            <input type="text" name="lastName" value="{{profile.lastName}}" />
+            <input type="text" name="lastName" value="{{profile.lastName}}"/>
           </label>
         </div>
       </div>
+
+      <!--roles-->
       <div class="row">
-        <div class="large-6 columns">
+        <div class="large-12 columns">
           <label>User roles</label>
           {{#each userRoles}}
-            <input id="{{name}}" name="userRole" type="checkbox" checked={{hasRole}} />
+            <input id="{{name}}" name="userRole" type="checkbox" {{hasRole}}/>
             <label for="{{name}}">{{capitalize name}}</label>
           {{/each}}
         </div>
       </div>
+
+      <!--projects-->
+      <div class="row">
+        <div class="large-12 columns">
+          <label>User projects</label>
+          {{#each projects}}
+            <input id="{{_id}}" name="projects" type="checkbox" {{hasProject}}/>
+            <label for="{{_id}}">{{name}}</label>
+          {{/each}}
+        </div>
+      </div>
+
     {{/if}}
     <div class="row">
       <div class="large-12 columns">

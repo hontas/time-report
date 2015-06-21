@@ -23,7 +23,8 @@ Meteor.methods({
             firstName: String,
             lastName: String,
             defaultActivityId: Match.Optional(String),
-            defaultProjectId: Match.Optional(String)
+            defaultProjectId: Match.Optional(String),
+            projectIds: Match.Optional([String])
         });
 
         if (_.isUndefined(profile.defaultActivityId)) {
@@ -31,6 +32,9 @@ Meteor.methods({
         }
         if (_.isUndefined(profile.defaultProjectId)) {
             profile.defaultProjectId = user.profile.defaultProjectId;
+        }
+        if (_.isUndefined(profile.projectIds)) {
+            profile.projectIds = user.profile.projectIds;
         }
 
         profile.updatedAt = new Date();

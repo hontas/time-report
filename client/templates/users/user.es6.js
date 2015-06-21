@@ -5,7 +5,16 @@ Template.user.helpers({
 
     hasRole: function () {
         var id = Template.instance().data._id;
-        return Roles.userIsInRole(id, [this.name]);
+        return Roles.userIsInRole(id, [this.name]) ? "checked" : null;
+    },
+
+    projects: function () {
+        return Projects.find();
+    },
+
+    hasProject: function () {
+        var projectIds = Template.instance().data.profile.projectIds || [];
+        return _.contains(projectIds, this._id) ? "checked" : null;
     },
 
     newUser: function () {
@@ -38,8 +47,12 @@ Template.user.events({
         if (id) {
             profile = {
                 firstName: form.firstName.value,
-                lastName: form.lastName.value
+                lastName: form.lastName.value,
+                projectIds: _.toArray(form.projects)
+                    .filter(input => input.checked)
+                    .map(input => input.id)
             };
+
             roles = roleInputs.reduce(getUserRoles, {});
 
             promisedCall("updateUserProfile", id, profile)

@@ -9,7 +9,8 @@ Template.userProfile.helpers({
     },
 
     projects: function () {
-        return Projects.find({}, { _id: 1, name: 1 });
+        var projectIds = Template.instance().data.profile.projectIds || [];
+        return Projects.find({ _id: { $in: projectIds } }, { _id: 1, name: 1 });
     },
 
     selectedProject: function () {
