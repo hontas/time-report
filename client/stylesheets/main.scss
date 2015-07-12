@@ -1,4 +1,9 @@
 @import '../lib/foundation/scss/foundation';
+@import 'variables';
+
+
+/* COMPONENTS */
+@import '../templates/reportTime/reportTime';
 
 .main-content {
   padding-top: $panel-padding;

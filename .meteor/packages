@@ -14,3 +14,4 @@ pontahontas:foundation-notifyer
 sanjo:jasmine
 velocity:html-reporter
 pontahontas:html-reporter-discrete
+pontahontas:test-helpers

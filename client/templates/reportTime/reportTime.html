@@ -1,0 +1,31 @@
+<template name="reportTime">
+  <form class="reportTime">
+    <div class="row">
+      <div class="small-12 columns">
+        <label> Project
+          <select name="project">
+            {{#each projects}}
+              <option value="{{_id}}" {{isSelected "defaultProjectId"}}>{{name}}</option>
+            {{/each}}
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns">
+        <label> Activity
+          <select name="activity">
+            {{#each activities}}
+              <option value="{{_id}}" {{isSelected "defaultActivityId"}}>{{name}}</option>
+            {{/each}}
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns">
+        <button class="button expand">Börja jobba nu</button>
+      </div>
+    </div>
+  </form>
+</template>
